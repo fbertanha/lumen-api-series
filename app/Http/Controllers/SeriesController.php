@@ -30,4 +30,17 @@ class SeriesController
         }
         return response()->json($serie, 200);
     }
+
+    public function update(int $id, Request $request)
+    {
+        $serie = Serie::find($id);
+        if (is_null($serie)) {
+            return response()->json(['error' => 'serie not found'], 404);
+        }
+        //$serie->fill(['nome' => $request->nome]);
+        $serie->fill($request->all());
+        $serie->save();
+
+        return response()->json($serie, 200);
+    }
 }
