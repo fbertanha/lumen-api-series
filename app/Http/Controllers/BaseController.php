@@ -22,9 +22,9 @@ abstract class BaseController
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->classe::all();
+        return $this->classe::paginate($request->per_page);
     }
 
     public function store(Request $request)
