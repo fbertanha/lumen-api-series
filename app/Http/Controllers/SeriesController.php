@@ -21,4 +21,13 @@ class SeriesController
             Serie::create(['nome' => $request->nome]),
             201);
     }
+
+    public function find(int $id)
+    {
+        $serie = Serie::find($id);
+        if (is_null($serie)) {
+            return response()->json(null, 204);
+        }
+        return response()->json($serie, 200);
+    }
 }
