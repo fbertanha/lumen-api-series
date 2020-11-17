@@ -24,4 +24,5 @@ $router->group(['prefix' => 'api'], function ($router) {
     $router->get('series', 'SeriesController@index');
     $router->get('series/{id}', 'SeriesController@find');
     $router->put('series/{id}', 'SeriesController@update');
+    $router->delete('series/{id}', 'SeriesController@destroy');
 });

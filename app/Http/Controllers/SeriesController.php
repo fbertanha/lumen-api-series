@@ -35,12 +35,26 @@ class SeriesController
     {
         $serie = Serie::find($id);
         if (is_null($serie)) {
-            return response()->json(['error' => 'serie not found'], 404);
+            return response()->json(
+                ['error' => 'serie not found'],
+                404);
         }
         //$serie->fill(['nome' => $request->nome]);
         $serie->fill($request->all());
         $serie->save();
 
         return response()->json($serie, 200);
+    }
+
+    public function destroy(int $id)
+    {
+        $qtdRecursosRemovidos = Serie::destroy($id);
+
+        if ($qtdRecursosRemovidos == 0) {
+            return response()->json(
+                ['error' => 'serie not found'],
+                404);
+        }
+        return response()->json(null, 204);
     }
 }
