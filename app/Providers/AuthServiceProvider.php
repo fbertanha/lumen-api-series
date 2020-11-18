@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Firebase\JWT\JWT;
-use Illuminate\Auth\GenericUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,8 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
             $dadosAutenticacao = JWT::decode($token, env('JWT_KEY'), ['HS256']);
 
-            return new GenericUser(['email' => $dadosAutenticacao]);
-            //return User::where('email', $dadosAutenticacao['email'])->first();
+            return User::where('email', $dadosAutenticacao->email)->first();
         });
     }
 }
