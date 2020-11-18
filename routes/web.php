@@ -18,8 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 
-
-$router->group(['prefix' => 'api'], function ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
     $router->group(['prefix' => 'series'], function ($router) {
 
         $router->post('', 'SeriesController@store');
@@ -31,7 +30,7 @@ $router->group(['prefix' => 'api'], function ($router) {
         $router->get('{serieId}/episodios', 'EpisodiosController@buscaPorSerie');
     });
 
-    $router->group(['prefix' => 'episodios'], function ($router){
+    $router->group(['prefix' => 'episodios'], function ($router) {
         $router->post('', 'EpisodiosController@store');
         $router->get('', 'EpisodiosController@index');
         $router->get('{id}', 'EpisodiosController@find');
